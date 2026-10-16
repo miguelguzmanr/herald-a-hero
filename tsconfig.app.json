@@ -10,7 +10,9 @@
         "allowJs": true,
         "checkJs": true,
         "moduleDetection": "force",
-        "noUncheckedIndexedAccess": true
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
     },
     "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }
