@@ -1,5 +1,13 @@
 {
-    "plugins": ["prettier-plugin-svelte"],
+    "plugins": ["prettier-plugin-svelte", "prettier-plugin-packagejson"],
     "tabWidth": 4,
-    "printWidth": 100
+    "printWidth": 100,
+    "overrides": [
+        {
+            "files": [".vscode/*.json"],
+            "options": {
+                "plugins": ["prettier-plugin-sort-json"]
+            }
+        }
+    ]
 }

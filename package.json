@@ -1,28 +1,30 @@
 {
     "name": "herald-a-hero",
+    "version": "0.0.0",
+    "private": true,
     "description": "A character builder for Herald's Decree.",
     "license": "GPL-3.0-or-later",
-    "packageManager": "pnpm@12.11.2",
-    "private": true,
-    "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev": "vite",
         "build": "vite build",
-        "preview": "vite preview",
         "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+        "dev": "vite",
         "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "preview": "vite preview"
     },
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^7.3.0",
         "@tsconfig/svelte": "^5.0.8",
         "@types/node": "^24.13.3",
         "prettier": "^3.9.10",
+        "prettier-plugin-packagejson": "^3.0.2",
+        "prettier-plugin-sort-json": "^4.2.0",
         "prettier-plugin-svelte": "^4.1.1",
         "svelte": "^5.57.0",
         "svelte-check": "^4.7.6",
         "typescript": "~6.0.2",
         "vite": "^8.3.0"
-    }
+    },
+    "packageManager": "pnpm@12.11.2"
 }
