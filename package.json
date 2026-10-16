@@ -2,6 +2,7 @@
     "name": "herald-a-hero",
     "description": "A character builder for Herald's Decree.",
     "license": "GPL-3.0-or-later",
+    "packageManager": "pnpm@12.11.2",
     "private": true,
     "version": "0.0.0",
     "type": "module",

@@ -10,10 +10,10 @@ Herald a Hero is written in TypeScript, using Vite and Svelte.
 
 ### Getting Started
 
-Requires Deno 2.9 or later.
+Requires pnpm and Node.js 26 or later.
 
 ```sh
-deno install && deno task dev
+pnpm install && pnpm dev
 ```
 
 ## Legal
