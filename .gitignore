@@ -1,0 +1,17 @@
+# Dependencies
+node_modules
+
+# Builds
+dist
+dist-ssr
+
+# Local overrides
+*.local
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
