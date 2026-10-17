@@ -1,6 +1,6 @@
 # Herald a Hero
 
-Herald a Hero is a hero builder for Herald's Decree, a tabletop RPG by [Milestone Play](https://milestoneplay.com/).
+Herald a Hero is an unofficial hero builder for Herald's Decree, a tabletop RPG by [Milestone Play](https://milestoneplay.com/).
 
 [![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](./LICENSE)
 

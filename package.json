@@ -2,7 +2,7 @@
     "name": "herald-a-hero",
     "version": "0.0.0",
     "private": true,
-    "description": "A character builder for Herald's Decree.",
+    "description": "An unofficial hero builder for Herald's Decree.",
     "license": "GPL-3.0-or-later",
     "type": "module",
     "scripts": {
