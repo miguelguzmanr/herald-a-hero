@@ -1,0 +1,9 @@
+@layer pico, app;
+
+@import "@picocss/pico/css/pico.min.css" layer(pico);
+
+@layer app {
+    :root {
+        /* TODO */
+    }
+}
