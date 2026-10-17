@@ -21,7 +21,6 @@
         // Prevents any scrolling and interactions below the modal
         // See: https://picocss.com/docs/modal#utilities
         const html = document.documentElement;
-        html.classList.toggle("modal-is-open", open);
 
         if (open)
             html.style.setProperty(
@@ -29,9 +28,11 @@
                 `${window.innerWidth - html.clientWidth}px`,
             );
 
+        html.classList.toggle("modal-is-open", open);
+
         return () => {
             html.classList.remove("modal-is-open");
-            html.style.removeProperty("----pico-scrollbar-width");
+            html.style.removeProperty("--pico-scrollbar-width");
         };
     });
 
