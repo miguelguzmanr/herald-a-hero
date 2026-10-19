@@ -1,10 +1,9 @@
 <script lang="ts">
-    import { createSave, storeSave } from "./lib/storage";
     import { heroes } from "./state/heroes.svelte";
     import HeroEditor from "./ui/HeroEditor.svelte";
     import HeroList from "./ui/HeroList.svelte";
 
-    $effect(() => storeSave(createSave(heroes.list)));
+    $effect(() => heroes.save());
 </script>
 
 <header class="container">

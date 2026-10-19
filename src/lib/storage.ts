@@ -1,11 +1,12 @@
-import type { Hero } from "./domain/hero";
+export const STORAGE_KEY = "herald-a-hero";
 
-const STORAGE_KEY = "herald-a-hero/heroes";
-const SAVE_VERSION = 1;
+type Envelope = { version: number; data: unknown };
 
-export type SaveData = {
-    version: typeof SAVE_VERSION;
-    heroes: readonly Hero[];
+export type Slot<T> = {
+    key: string;
+    version: number;
+    validate: (data: unknown) => data is T;
+    migrate?: Record<number, (data: unknown) => unknown>;
 };
 
 function read(key: string): string | null {
@@ -24,28 +25,35 @@ function write(key: string, value: string): void {
     }
 }
 
-export function createSave(heroes: Hero[]): SaveData {
-    return {
-        version: SAVE_VERSION,
-        heroes,
-    };
-}
-
-function isSaveData(data: unknown): data is SaveData {
+function isEnvelope(data: unknown): data is Envelope {
     return (
         typeof data === "object" &&
         data !== null &&
         "version" in data &&
-        data.version === SAVE_VERSION &&
-        "heroes" in data &&
-        Array.isArray(data.heroes)
+        typeof data.version === "number" &&
+        "data" in data
     );
 }
 
-export function parseSave(raw: string): SaveData | undefined {
+export function parse<T>(slot: Slot<T>, raw: string): T | undefined {
     try {
-        const data: unknown = JSON.parse(raw);
-        if (isSaveData(data)) return data;
+        const envelope: unknown = JSON.parse(raw);
+
+        if (!isEnvelope(envelope)) return undefined;
+
+        let { version, data } = envelope;
+
+        while (version < slot.version) {
+            const migrate = slot.migrate?.[version];
+
+            if (!migrate) return undefined;
+
+            data = migrate(data);
+
+            version++;
+        }
+
+        if (version === slot.version && slot.validate(data)) return data;
     } catch {
         // TODO
     }
@@ -53,19 +61,20 @@ export function parseSave(raw: string): SaveData | undefined {
     return undefined;
 }
 
-export function loadSave(): SaveData | undefined {
-    const raw = read(STORAGE_KEY);
+export function load<T>(slot: Slot<T>): T | undefined {
+    const raw = read(slot.key);
 
     if (raw === null) return undefined;
 
-    const data = parseSave(raw);
+    const data = parse(slot, raw);
 
-    if (!data) write(`${STORAGE_KEY}.backup`, raw);
+    if (data === undefined) write(`${slot.key}.backup`, raw);
 
     return data;
 }
 
-export function storeSave(data: SaveData): void {
-    const raw = JSON.stringify(data);
-    write(STORAGE_KEY, raw);
+export function store<T>(slot: Slot<T>, data: T): void {
+    const envelope: Envelope = { version: slot.version, data };
+    const raw: string = JSON.stringify(envelope);
+    write(slot.key, raw);
 }
