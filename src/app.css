@@ -1,9 +1,143 @@
-@layer pico, app;
+@layer pico, app, utilities;
 
 @import "@picocss/pico/css/pico.min.css" layer(pico);
 
 @layer app {
     :root {
-        /* TODO */
+        --app-font-family-decorative: "Cinzel Decorative", Georgia, "Times New Roman", Times, serif;
+        --app-font-family-serif: "Petrona", Georgia, "Times New Roman", Times, serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--app-font-family-decorative);
+    }
+}
+
+@layer utilities {
+    /* Font Family */
+    .u-text-decorative {
+        font-family: var(--app-font-family-decorative);
+    }
+    .u-text-serif {
+        font-family: var(--app-font-family-serif);
+    }
+    /* Text */
+    .u-text-start {
+        text-align: start;
+    }
+    .u-text-center {
+        text-align: center;
+    }
+    .u-text-end {
+        text-align: end;
+    }
+    .u-text-titlecase {
+        text-transform: capitalize;
+    }
+    .u-text-uppercase {
+        text-transform: uppercase;
+    }
+    .u-text-lowercase {
+        text-transform: lowercase;
+    }
+    .u-text-muted {
+        color: var(--pico-muted-color);
+    }
+    /* Font Weight */
+    .u-text-lighter {
+        font-weight: 100;
+    }
+    .u-text-light {
+        font-weight: 300;
+    }
+    .u-text-normal {
+        font-weight: 400;
+    }
+    .u-text-medium {
+        font-weight: 500;
+    }
+    .u-text-bold {
+        font-weight: 700;
+    }
+    .u-text-bolder {
+        font-weight: 900;
+    }
+
+    /* Visibility */
+    .u-hidden {
+        display: none !important;
+    }
+    .u-visible {
+        visibility: visible !important;
+    }
+
+    /* Opacity */
+    .u-opacity-0 {
+        opacity: 0;
+    }
+    .u-opacity-5 {
+        opacity: 0.05;
+    }
+    .u-opacity-10 {
+        opacity: 0.1;
+    }
+    .u-opacity-15 {
+        opacity: 0.15;
+    }
+    .u-opacity-20 {
+        opacity: 0.2;
+    }
+    .u-opacity-25 {
+        opacity: 0.25;
+    }
+    .u-opacity-30 {
+        opacity: 0.3;
+    }
+    .u-opacity-35 {
+        opacity: 0.35;
+    }
+    .u-opacity-40 {
+        opacity: 0.4;
+    }
+    .u-opacity-45 {
+        opacity: 0.45;
+    }
+    .u-opacity-50 {
+        opacity: 0.5;
+    }
+    .u-opacity-55 {
+        opacity: 0.55;
+    }
+    .u-opacity-60 {
+        opacity: 0.6;
+    }
+    .u-opacity-65 {
+        opacity: 0.65;
+    }
+    .u-opacity-70 {
+        opacity: 0.7;
+    }
+    .u-opacity-75 {
+        opacity: 0.75;
+    }
+    .u-opacity-80 {
+        opacity: 0.8;
+    }
+    .u-opacity-85 {
+        opacity: 0.85;
+    }
+    .u-opacity-90 {
+        opacity: 0.9;
+    }
+    .u-opacity-95 {
+        opacity: 0.95;
+    }
+    .u-opacity-100 {
+        opacity: 1;
     }
 }
