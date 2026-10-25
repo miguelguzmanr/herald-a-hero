@@ -51,6 +51,11 @@
 </header>
 
 <main class="container">
+    {#if heroes.saveFailed || battles.saveFailed}
+        <p role="alert">
+            Changes can't be saved in this browser at the moment and will be lost on reload.
+        </p>
+    {/if}
     {#if !hero}
         <HeroList />
     {:else if route.name === "hero"}

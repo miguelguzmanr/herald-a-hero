@@ -15,6 +15,7 @@ const HEROES: Slot<Hero[]> = {
 
 class HeroStore {
     list = $state<Hero[]>([...(load(HEROES) ?? [])]);
+    saveFailed = $state(false);
 
     find(id: HeroId): Hero | undefined {
         return this.list.find((hero) => hero.id === id);
@@ -33,7 +34,7 @@ class HeroStore {
     }
 
     save(): void {
-        store(HEROES, this.list);
+        this.saveFailed = !store(HEROES, this.list);
     }
 }
 

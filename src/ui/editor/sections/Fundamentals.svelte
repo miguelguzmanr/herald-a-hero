@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Hero } from "../../../lib/domain/hero";
     import { formatSize, SIZES } from "../../../lib/domain/size";
+    import { toWholeNumber } from "../../../lib/validations";
 
     let { hero }: { hero: Hero } = $props();
 </script>
@@ -20,7 +21,12 @@
     <div class="grid">
         <label>
             Hero Rank
-            <input type="number" inputmode="numeric" min="0" bind:value={hero.rank} />
+            <input
+                type="number"
+                inputmode="numeric"
+                min="1"
+                bind:value={() => hero.rank, (v) => (hero.rank = toWholeNumber(v, 1))}
+            />
         </label>
 
         <label>

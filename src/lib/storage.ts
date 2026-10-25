@@ -17,11 +17,12 @@ function read(key: string): string | null {
     }
 }
 
-function write(key: string, value: string): void {
+function write(key: string, value: string): boolean {
     try {
         localStorage.setItem(key, value);
+        return true;
     } catch {
-        // TODO
+        return false;
     }
 }
 
@@ -73,8 +74,8 @@ export function load<T>(slot: Slot<T>): T | undefined {
     return data;
 }
 
-export function store<T>(slot: Slot<T>, data: T): void {
+export function store<T>(slot: Slot<T>, data: T): boolean {
     const envelope: Envelope = { version: slot.version, data };
     const raw: string = JSON.stringify(envelope);
-    write(slot.key, raw);
+    return write(slot.key, raw);
 }

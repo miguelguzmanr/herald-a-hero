@@ -1,6 +1,12 @@
-import { perCapacity, type CapacityId, type CapacityScores } from "../lib/domain/capacity";
+import {
+    isPerCapacity,
+    perCapacity,
+    type CapacityId,
+    type CapacityScores,
+} from "../lib/domain/capacity";
 import type { Hero, HeroId } from "../lib/domain/hero";
 import { STORAGE_KEY, load, store, type Slot } from "../lib/storage";
+import { isRecord, isWholeNumber } from "../lib/validations";
 
 const HISTORY_LIMIT = 100;
 
@@ -15,11 +21,34 @@ type BattleState = {
 
 type Battle = { state: BattleState; history: BattleState[] };
 
+function isSpent(value: unknown): value is Spent {
+    return isRecord(value) && isWholeNumber(value.potential) && isWholeNumber(value.momentum);
+}
+
+function isBattleState(value: unknown): value is BattleState {
+    return (
+        isRecord(value) &&
+        isWholeNumber(value.round) &&
+        isWholeNumber(value.potential) &&
+        isPerCapacity(value.momentum, isWholeNumber) &&
+        isPerCapacity(value.spent, isSpent)
+    );
+}
+
+function isBattle(value: unknown): value is Battle {
+    return (
+        isRecord(value) &&
+        isBattleState(value.state) &&
+        Array.isArray(value.history) &&
+        value.history.every(isBattleState)
+    );
+}
+
 const BATTLES: Slot<Record<HeroId, Battle>> = {
     key: `${STORAGE_KEY}/battles`,
     version: 1,
     validate: (data): data is Record<HeroId, Battle> =>
-        typeof data === "object" && data !== null && !Array.isArray(data),
+        isRecord(data) && Object.values(data).every(isBattle),
 };
 
 function createBattleState(): BattleState {
@@ -35,6 +64,7 @@ const NOT_STARTED = createBattleState();
 
 class BattleStore {
     #battles = $state<Record<HeroId, Battle>>(load(BATTLES) ?? {});
+    saveFailed = $state(false);
 
     state(hero: Hero): BattleState {
         return this.#battles[hero.id]?.state ?? NOT_STARTED;
@@ -110,7 +140,7 @@ class BattleStore {
     }
 
     save(): void {
-        store(BATTLES, this.#battles);
+        this.saveFailed = !store(BATTLES, this.#battles);
     }
 
     #record(hero: Hero): BattleState {
