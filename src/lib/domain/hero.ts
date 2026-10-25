@@ -10,5 +10,4 @@ export type Hero = {
     capacities: CapacityScores;
     core?: CapacityId;
     potentialScore: number;
-    // skills: SkillRanks;
 };

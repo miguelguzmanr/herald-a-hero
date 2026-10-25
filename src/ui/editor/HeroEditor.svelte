@@ -19,24 +19,31 @@
     </details>
     <details name="hero">
         <summary>Skills</summary>
+        <p>Work in progress.</p>
     </details>
     <details name="hero">
         <summary>Inventory</summary>
+        <p>Work in progress.</p>
     </details>
     <details name="hero">
         <summary>Battle</summary>
+        <p>Work in progress.</p>
     </details>
     <details name="hero">
         <summary>Journey</summary>
+        <p>Work in progress.</p>
     </details>
     <details name="hero">
         <summary>Montage</summary>
+        <p>Work in progress.</p>
     </details>
     <details name="hero">
         <summary>Respite</summary>
+        <p>Work in progress.</p>
     </details>
     <details name="hero">
         <summary>Skirmish</summary>
+        <p>Work in progress.</p>
     </details>
 </section>
 
