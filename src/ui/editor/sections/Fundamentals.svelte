@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Hero } from "../../../lib/domain/hero";
+    import { formatSize, SIZES } from "../../../lib/domain/size";
 
     let { hero }: { hero: Hero } = $props();
 </script>
@@ -24,7 +25,11 @@
 
         <label>
             Size
-            <input type="number" inputmode="numeric" min="0" bind:value={hero.size} />
+            <select bind:value={hero.size}>
+                {#each SIZES as size (size)}
+                    <option value={size}>{formatSize(size)}</option>
+                {/each}
+            </select>
         </label>
     </div>
 </section>

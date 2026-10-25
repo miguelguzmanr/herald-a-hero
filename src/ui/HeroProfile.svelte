@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Hero } from "../lib/domain/hero";
     import { SCENE_IDS } from "../lib/domain/scene";
+    import { formatSize } from "../lib/domain/size";
     import { href, router } from "../router.svelte";
     import { heroes } from "../state/heroes.svelte";
     import ConfirmDialog from "./helpers/ConfirmDialog.svelte";
@@ -20,7 +21,7 @@
     <ul>
         <li>Player: <strong>{hero.player}</strong></li>
         <li>Hero Rank: <strong>{hero.rank}</strong></li>
-        <li>Size: <strong>{hero.size}</strong></li>
+        <li>Size: <strong>{formatSize(hero.size)}</strong></li>
         <li>Potential Score: <strong>{hero.potentialScore}</strong></li>
     </ul>
     <div class="grid">
