@@ -5,7 +5,7 @@
 </script>
 
 <section>
-    <p class="grid">
+    <div class="grid">
         <label>
             Character
             <input type="text" bind:value={hero.name} autocomplete="off" />
@@ -15,8 +15,8 @@
             Player
             <input type="text" bind:value={hero.player} autocomplete="off" />
         </label>
-    </p>
-    <p class="grid">
+    </div>
+    <div class="grid">
         <label>
             Hero Rank
             <input type="number" inputmode="numeric" min="0" bind:value={hero.rank} />
@@ -26,5 +26,5 @@
             Size
             <input type="number" inputmode="numeric" min="0" bind:value={hero.size} />
         </label>
-    </p>
+    </div>
 </section>
