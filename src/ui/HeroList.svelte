@@ -1,50 +1,27 @@
 <script lang="ts">
-    import type { Hero } from "../lib/domain/hero";
+    import { href, router } from "../router.svelte";
     import { heroes } from "../state/heroes.svelte";
-    import ConfirmDialog from "./helpers/ConfirmDialog.svelte";
 
-    let heroToDelete = $state<Hero>();
-
-    function confirmDelete(): void {
-        if (heroToDelete) heroes.remove(heroToDelete.id);
-        heroToDelete = undefined;
+    function create(): void {
+        router.go({ name: "edit", heroId: heroes.create() });
     }
 </script>
 
 <section>
-    <h2>Your heroes</h2>
+    <h2 class="u-text-decorative">Your heroes</h2>
 
-    <button onclick={() => heroes.create()}>Create</button>
+    <p><button onclick={() => create()}>Create</button></p>
 
-    {#if heroes.list.length === 0}
-        <p>No heroes.</p>
+    {#each heroes.list as hero (hero.id)}
+        <article>
+            <a class="u-text-decorative" href={href({ name: "hero", heroId: hero.id })}
+                >{hero.name || "Unnamed hero"}</a
+            >
+            {#if hero.player}
+                <small>({hero.player})</small>
+            {/if}
+        </article>
     {:else}
-        <ul>
-            {#each heroes.list as hero (hero.id)}
-                <li>
-                    {hero.name || "Unnamed hero"}
-                    <button onclick={() => (heroes.selectedId = hero.id)}>Edit</button>
-                    {#if hero.player}
-                        <span>({hero.player})</span>
-                    {/if}
-                    <button class="secondary outline" onclick={() => (heroToDelete = hero)}
-                        >Delete</button
-                    >
-                </li>
-            {/each}
-        </ul>
-    {/if}
-
-    <ConfirmDialog
-        open={heroToDelete !== undefined}
-        title="Confirm Delete"
-        confirmLabel="Delete"
-        onconfirm={confirmDelete}
-        onclose={() => (heroToDelete = undefined)}
-    >
-        <p>
-            Are you sure you want to delete <strong>{heroToDelete?.name || "this hero"}</strong>?
-            This action can't be undone.
-        </p>
-    </ConfirmDialog>
+        <p>Nothing here yet.</p>
+    {/each}
 </section>

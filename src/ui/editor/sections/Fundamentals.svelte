@@ -1,19 +1,30 @@
 <script lang="ts">
-    import type { Hero } from "../../lib/domain/hero";
+    import type { Hero } from "../../../lib/domain/hero";
 
     let { hero }: { hero: Hero } = $props();
 </script>
 
 <section>
-    <h2>Fundamentals</h2>
+    <p class="grid">
+        <label>
+            Character
+            <input type="text" bind:value={hero.name} autocomplete="off" />
+        </label>
 
-    <label>
-        Hero name
-        <input type="text" bind:value={hero.name} autocomplete="off" />
-    </label>
+        <label>
+            Player
+            <input type="text" bind:value={hero.player} autocomplete="off" />
+        </label>
+    </p>
+    <p class="grid">
+        <label>
+            Hero Rank
+            <input type="number" inputmode="numeric" min="0" bind:value={hero.rank} />
+        </label>
 
-    <label>
-        Player name
-        <input type="text" bind:value={hero.player} autocomplete="off" />
-    </label>
+        <label>
+            Size
+            <input type="number" inputmode="numeric" min="0" bind:value={hero.size} />
+        </label>
+    </p>
 </section>
