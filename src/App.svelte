@@ -16,8 +16,8 @@
 
 <header class="container">
     <hgroup>
-        <h1 class="u-text-decorative">Herald a Hero</h1>
-        <p class="u-text-serif">
+        <h1>Herald a Hero</h1>
+        <p>
             An unofficial hero builder for <span class="u-text-decorative">Herald's Decree</span>, a
             tabletop RPG by
             <a href="https://milestoneplay.com/" target="_blank" rel="noopener noreferrer"
@@ -56,7 +56,7 @@
     {:else if route.name === "scene" && route.scene === "battle"}
         <BattleScene {hero} />
     {:else}
-        <p>Not found.</p>
+        <p>Work in progress.</p>
     {/if}
 </main>
 

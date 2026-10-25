@@ -17,22 +17,17 @@
 
 <section>
     <h2>{hero.name || "Unnamed hero"}</h2>
-    <ul class="u-text-serif">
+    <ul>
         <li>Player: <strong>{hero.player}</strong></li>
         <li>Hero Rank: <strong>{hero.rank}</strong></li>
-        <li>Pathways:</li>
-        <li>Ancestry:</li>
-        <li>Upbringing:</li>
-        <li>Community:</li>
         <li>Size: <strong>{hero.size}</strong></li>
         <li>Potential Score: <strong>{hero.potentialScore}</strong></li>
-        <li>Advancement Points: <strong>0</strong></li>
     </ul>
-    <p class="grid">
+    <div class="grid">
         <a role="button" class="secondary" href={href({ name: "edit", heroId: hero.id })}>Edit</a>
         <button class="secondary outline" onclick={() => (isConfirmingDelete = true)}>Delete</button
         >
-    </p>
+    </div>
 </section>
 
 <section>
@@ -56,7 +51,7 @@
     onconfirm={confirmDelete}
     onclose={() => (isConfirmingDelete = false)}
 >
-    <p class="u-text-serif">
+    <p>
         Are you sure you want to delete <strong>{hero.name || "Unnamed hero"}</strong>?
         <br />This action can't be undone.
     </p>

@@ -8,13 +8,13 @@
 </script>
 
 <section>
-    <h2 class="u-text-decorative">Your heroes</h2>
+    <h2>Your heroes</h2>
 
     <p><button onclick={() => create()}>Create</button></p>
 
     {#each heroes.list as hero (hero.id)}
         <article>
-            <a class="u-text-decorative" href={href({ name: "hero", heroId: hero.id })}
+            <a class="u-text-decorative u-text-bold" href={href({ name: "hero", heroId: hero.id })}
                 >{hero.name || "Unnamed hero"}</a
             >
             {#if hero.player}

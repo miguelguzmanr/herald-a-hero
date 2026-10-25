@@ -5,7 +5,9 @@
 @layer app {
     :root {
         --app-font-family-decorative: "Cinzel Decorative", Georgia, "Times New Roman", Times, serif;
-        --app-font-family-serif: "Petrona", Georgia, "Times New Roman", Times, serif;
+        --app-font-family-serif: "Petrona Variable", Georgia, "Times New Roman", Times, serif;
+
+        --pico-font-family: var(--app-font-family-serif);
     }
 
     h1,
@@ -14,7 +16,16 @@
     h4,
     h5,
     h6 {
-        font-family: var(--app-font-family-decorative);
+        --pico-font-family: var(--app-font-family-decorative);
+    }
+
+    button,
+    input,
+    select,
+    textarea,
+    mark,
+    [role="button"] {
+        font-family: var(--pico-font-family-sans-serif);
     }
 }
 
