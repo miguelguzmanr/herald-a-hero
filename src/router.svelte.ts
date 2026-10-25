@@ -7,7 +7,7 @@ export type Route =
     | { name: "edit"; heroId: HeroId }
     | { name: "scene"; heroId: HeroId; scene: Scene };
 
-/** Parse "#/hero/<heroId>/<scene>" */
+/** Parse "#/hero/<heroId>/<page>" */
 function parse(hash: string): Route {
     const [first, heroId, page] = hash.replace(/^#\/?/, "").split("/");
 
@@ -41,6 +41,10 @@ class Router {
 
     go(route: Route): void {
         location.hash = href(route);
+    }
+
+    replace(route: Route): void {
+        location.replace(href(route));
     }
 }
 

@@ -10,6 +10,10 @@
     const route = $derived(router.route);
     const hero = $derived(route.name === "home" ? undefined : heroes.find(route.heroId));
 
+    $effect(() => {
+        if (route.name !== "home" && !hero) router.replace({ name: "home" });
+    });
+
     $effect(() => heroes.save());
     $effect(() => battles.save());
 </script>
