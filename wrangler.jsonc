@@ -5,4 +5,11 @@
     "assets": {
         "directory": "./dist",
     },
+    "routes": [
+        {
+            "pattern": "herald-a-hero.miguelguzman.dev",
+            "custom_domain": true,
+        },
+    ],
+    "workers_dev": false,
 }
