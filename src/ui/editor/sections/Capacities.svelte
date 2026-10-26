@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CAPACITY_IDS } from "../../../lib/domain/capacity";
+    import { CAPACITY_IDS, CAPACITY_NAMES } from "../../../lib/domain/capacity";
     import type { Hero } from "../../../lib/domain/hero";
     import { toWholeNumber } from "../../../lib/validations";
 
@@ -22,9 +22,9 @@
         <label>
             Core Capacity
             <select bind:value={hero.core}>
-                <option value={undefined}>unset</option>
+                <option value={undefined}>Unset</option>
                 {#each CAPACITY_IDS as id (id)}
-                    <option value={id}>{id}</option>
+                    <option value={id}>{CAPACITY_NAMES[id]}</option>
                 {/each}
             </select>
         </label>
@@ -33,7 +33,7 @@
     <div class="grid">
         {#each CAPACITY_IDS as id (id)}
             <label>
-                {id}
+                {CAPACITY_NAMES[id]}
                 <input
                     type="number"
                     inputmode="numeric"
@@ -46,10 +46,3 @@
         {/each}
     </div>
 </section>
-
-<style>
-    label,
-    select {
-        text-transform: capitalize;
-    }
-</style>

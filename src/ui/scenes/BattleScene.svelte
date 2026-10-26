@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CAPACITY_IDS } from "../../lib/domain/capacity";
+    import { CAPACITY_IDS, CAPACITY_NAMES } from "../../lib/domain/capacity";
     import type { Hero } from "../../lib/domain/hero";
     import { battles } from "../../state/battles.svelte";
     import ConfirmDialog from "../helpers/ConfirmDialog.svelte";
@@ -30,7 +30,7 @@
         <p class="u-text-muted">
             At the start of each round, gain {hero.potentialScore} Potential
             {#if hero.core}
-                and 1 <span class="u-text-titlecase">{hero.core}</span> Momentum
+                and 1 {CAPACITY_NAMES[hero.core]} Momentum
             {/if}
         </p>
         {#if !hero.core}
@@ -56,12 +56,12 @@
     </article>
 </section>
 
-<div class="capacities">
+<section class="capacities">
     {#each CAPACITY_IDS as id (id)}
         <article>
             <header>
                 {hero.capacities[id]}
-                <strong class="u-text-decorative u-text-titlecase">{id}</strong>
+                <strong class="u-text-decorative">{CAPACITY_NAMES[id]}</strong>
                 {#if id === hero.core}<mark>Core</mark>{/if}
             </header>
 
@@ -108,7 +108,7 @@
             </footer>
         </article>
     {/each}
-</div>
+</section>
 
 <ConfirmDialog
     open={confirmingReset}

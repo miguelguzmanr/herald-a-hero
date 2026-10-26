@@ -13,6 +13,15 @@ export const CAPACITY_IDS = [
 export type CapacityId = (typeof CAPACITY_IDS)[number];
 export type CapacityScores = Record<CapacityId, number>;
 
+export const CAPACITY_NAMES: Record<CapacityId, string> = {
+    martial: "Martial",
+    defense: "Defense",
+    agility: "Agility",
+    skill: "Skill",
+    willpower: "Willpower",
+    arcana: "Arcana",
+};
+
 export function perCapacity<T>(value: (id: CapacityId) => T): Record<CapacityId, T> {
     return Object.fromEntries(CAPACITY_IDS.map((id) => [id, value(id)])) as Record<CapacityId, T>;
 }
