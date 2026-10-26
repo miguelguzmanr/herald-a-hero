@@ -56,6 +56,12 @@
             Changes can't be saved in this browser at the moment and will be lost on reload.
         </p>
     {/if}
+    {#if heroes.skipped > 0}
+        <p role="alert">
+            {heroes.skipped === 1 ? "A saved hero" : `${heroes.skipped} saved heroes`} couldn't be read.
+            Nothing was lost, just set aside for now.
+        </p>
+    {/if}
     {#if !hero}
         <HeroList />
     {:else if route.name === "hero"}

@@ -1,7 +1,14 @@
 import { createHero } from "../lib/decree/creation";
-import type { Hero, HeroId } from "../lib/domain/hero";
+import { isHero, type Hero, type HeroId } from "../lib/domain/hero";
 import { STORAGE_KEY, load, store, type Slot } from "../lib/storage";
+import { isRecord } from "../lib/validations";
 import { battles } from "./battles.svelte";
+
+function withDefaults(data: unknown): unknown {
+    return (data as unknown[]).map((hero) =>
+        isRecord(hero) ? { ...createHero(), ...hero } : hero,
+    );
+}
 
 const HEROES: Slot<Hero[]> = {
     key: `${STORAGE_KEY}/heroes`,
@@ -9,15 +16,36 @@ const HEROES: Slot<Hero[]> = {
     validate: (data): data is Hero[] => Array.isArray(data),
     migrate: {
         /** v2: adds capacities, core, and potentialScore */
-        1: (data) => (data as Hero[]).map((hero) => ({ ...createHero(), ...hero })),
+        1: withDefaults,
         /** v3: adds skills and proficiencies */
-        2: (data) => (data as Hero[]).map((hero) => ({ ...createHero(), ...hero })),
+        2: withDefaults,
     },
 };
 
+const SKIPPED: Slot<unknown[]> = {
+    key: `${HEROES.key}.skipped`,
+    version: 1,
+    validate: (data): data is unknown[] => Array.isArray(data),
+};
+
+function loadHeroes(): { list: Hero[]; skipped: number } {
+    const data = load(HEROES) ?? [];
+    const list = data.filter(isHero);
+    const skipped = data.filter((item) => !isHero(item));
+
+    if (skipped.length > 0 && store(SKIPPED, [...(load(SKIPPED) ?? []), ...skipped])) {
+        store(HEROES, list);
+    }
+
+    return { list, skipped: skipped.length };
+}
+
+const loaded = loadHeroes();
+
 class HeroStore {
-    list = $state<Hero[]>([...(load(HEROES) ?? [])]);
+    list = $state<Hero[]>(loaded.list);
     saveFailed = $state(false);
+    readonly skipped = loaded.skipped;
 
     find(id: HeroId): Hero | undefined {
         return this.list.find((hero) => hero.id === id);
