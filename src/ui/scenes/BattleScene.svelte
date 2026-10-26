@@ -88,14 +88,21 @@
                 </p>
                 <p class="grid">
                     <button
+                        disabled={!battles.canSpendPotentialGainMomentum(hero, id)}
+                        onclick={() => battles.spendPotentialGainMomentum(hero, id)}
+                        >Potential into Momentum</button
+                    >
+                </p>
+                <p class="grid">
+                    <button
                         disabled={!battles.canSpendMomentum(hero, id)}
                         onclick={() => battles.spendMomentum(hero, id)}>Spend Momentum</button
                     >
                 </p>
                 <p class="grid">
                     <button
-                        disabled={!battles.canGainMomentum(hero, id)}
-                        onclick={() => battles.gainMomentum(hero, id)}>Gain Momentum</button
+                        disabled={!battles.canGainMomentum(hero, id) || !battles.started(hero)}
+                        onclick={() => battles.gainMomentum(hero, id)}>Gain Free Momentum</button
                     >
                 </p>
             </footer>

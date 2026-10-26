@@ -89,8 +89,11 @@ class BattleStore {
     }
 
     canGainMomentum(hero: Hero, id: CapacityId): boolean {
-        const { momentum } = this.state(hero);
-        return this.canSpendPotential(hero, id) && momentum[id] < hero.capacities[id];
+        return this.state(hero).momentum[id] < hero.capacities[id];
+    }
+
+    canSpendPotentialGainMomentum(hero: Hero, id: CapacityId): boolean {
+        return this.canSpendPotential(hero, id) && this.canGainMomentum(hero, id);
     }
 
     spendPotential(hero: Hero, id: CapacityId): void {
@@ -109,6 +112,12 @@ class BattleStore {
 
     gainMomentum(hero: Hero, id: CapacityId): void {
         if (!this.canGainMomentum(hero, id)) return;
+        const state = this.#record(hero);
+        state.momentum[id]++;
+    }
+
+    spendPotentialGainMomentum(hero: Hero, id: CapacityId): void {
+        if (!this.canSpendPotentialGainMomentum(hero, id)) return;
         const state = this.#record(hero);
         state.potential--;
         state.spent[id].potential++;
