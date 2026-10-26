@@ -29,20 +29,32 @@
             </select>
         </label>
     </div>
-
-    <div class="grid">
-        {#each CAPACITY_IDS as id (id)}
-            <label>
-                {CAPACITY_NAMES[id]}
-                <input
-                    type="number"
-                    inputmode="numeric"
-                    min="0"
-                    bind:value={
-                        () => hero.capacities[id], (v) => (hero.capacities[id] = toWholeNumber(v))
-                    }
-                />
-            </label>
-        {/each}
-    </div>
 </section>
+<section class="capacities">
+    {#each CAPACITY_IDS as id (id)}
+        <label>
+            {CAPACITY_NAMES[id]}
+            <input
+                type="number"
+                inputmode="numeric"
+                min="0"
+                bind:value={
+                    () => hero.capacities[id], (v) => (hero.capacities[id] = toWholeNumber(v))
+                }
+            />
+        </label>
+    {/each}
+</section>
+
+<style>
+    .capacities {
+        display: grid;
+        gap: 0 var(--pico-grid-column-gap);
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 576px) {
+        .capacities {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+</style>
