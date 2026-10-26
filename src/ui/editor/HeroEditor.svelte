@@ -2,6 +2,7 @@
     import type { Hero } from "../../lib/domain/hero";
     import Capacities from "./sections/Capacities.svelte";
     import Fundamentals from "./sections/Fundamentals.svelte";
+    import Skills from "./sections/Skills.svelte";
 
     let { hero }: { hero: Hero } = $props();
 </script>
@@ -18,7 +19,11 @@
         <Capacities {hero} />
     </details>
     <details name="hero">
-        <summary>Skills</summary>
+        <summary>Skill Training</summary>
+        <Skills {hero} />
+    </details>
+    <details name="hero">
+        <summary>Proficiencies</summary>
         <p>Work in progress.</p>
     </details>
     <details name="hero">
