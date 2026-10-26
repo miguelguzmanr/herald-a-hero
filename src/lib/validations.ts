@@ -10,8 +10,8 @@ export function isWholeNumber(value: unknown): value is number {
     return Number.isInteger(value) && (value as number) >= 0;
 }
 
-export function toWholeNumber(value: unknown, min = 0): number {
+export function toWholeNumber(value: unknown, min = 0, max = Infinity): number {
     return typeof value === "number" && Number.isFinite(value)
-        ? Math.max(min, Math.trunc(value))
+        ? Math.min(max, Math.max(min, Math.trunc(value)))
         : min;
 }
