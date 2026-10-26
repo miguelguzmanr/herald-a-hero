@@ -5,11 +5,13 @@ import { battles } from "./battles.svelte";
 
 const HEROES: Slot<Hero[]> = {
     key: `${STORAGE_KEY}/heroes`,
-    version: 2,
+    version: 3,
     validate: (data): data is Hero[] => Array.isArray(data),
     migrate: {
         /** v2: adds capacities, core, and potentialScore */
         1: (data) => (data as Hero[]).map((hero) => ({ ...createHero(), ...hero })),
+        /** v3: adds skills and proficiencies */
+        2: (data) => (data as Hero[]).map((hero) => ({ ...createHero(), ...hero })),
     },
 };
 
