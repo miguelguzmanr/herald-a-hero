@@ -5,6 +5,7 @@
     import HeroEditor from "./ui/editor/HeroEditor.svelte";
     import HeroList from "./ui/HeroList.svelte";
     import HeroProfile from "./ui/HeroProfile.svelte";
+    import HeroSummary from "./ui/HeroSummary.svelte";
     import BattleScene from "./ui/scenes/BattleScene.svelte";
 
     const route = $derived(router.route);
@@ -59,7 +60,6 @@
     {#if heroes.skipped > 0}
         <p role="alert">
             {heroes.skipped === 1 ? "A saved hero" : `${heroes.skipped} saved heroes`} couldn't be read.
-            Nothing was lost, just set aside for now.
         </p>
     {/if}
     {#if !hero}
@@ -81,3 +81,7 @@
         <a href="https://github.com/miguelguzmanr/herald-a-hero">Source Code</a>
     </small>
 </footer>
+
+{#if hero && route.name === "scene"}
+    <HeroSummary {hero} />
+{/if}
