@@ -1,6 +1,6 @@
 import { isRecord, isStringArray, isWholeNumber } from "../validations";
 import { isCapacityId, isPerCapacity, type CapacityId, type CapacityScores } from "./capacity";
-import type { Proficiency } from "./proficiency";
+import { isProficiency, type Proficiency } from "./proficiency";
 import { isSize } from "./size";
 import {
     isPerSkill,
@@ -52,8 +52,12 @@ export function isHero(value: unknown): value is Hero {
         ) &&
         Array.isArray(value.terrains) &&
         Array.isArray(value.lores) &&
+        value.lores.every(isProficiency) &&
         Array.isArray(value.languages) &&
+        value.languages.every(isProficiency) &&
         Array.isArray(value.crafts) &&
-        Array.isArray(value.occupations)
+        value.crafts.every(isProficiency) &&
+        Array.isArray(value.occupations) &&
+        value.occupations.every(isProficiency)
     );
 }

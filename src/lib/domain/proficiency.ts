@@ -1,3 +1,5 @@
+import { isRecord, isWholeNumber } from "../validations";
+
 export type ProficiencyId = string;
 export type Proficiency = {
     id: ProficiencyId;
@@ -15,3 +17,12 @@ export const CRAFT_RANK_NAMES = [
     "Master",
     "Grandmaster",
 ] as const;
+
+export function isProficiency(value: unknown): value is Proficiency {
+    return (
+        isRecord(value) &&
+        typeof value.id === "string" &&
+        typeof value.name === "string" &&
+        (value.rank === undefined || isWholeNumber(value.rank))
+    );
+}
